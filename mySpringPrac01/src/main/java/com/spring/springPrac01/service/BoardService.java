@@ -8,4 +8,5 @@ public interface BoardService {
 
 	public void makeDummyData() throws Exception;
 	public List<BoardDTO> getAllBoard() throws Exception;
+	public void insertBoard(BoardDTO bdto) throws Exception;
 }

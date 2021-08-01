@@ -26,5 +26,28 @@
 		FROM BOARD
 		ORDER BY REF DESC, RE_STEP;
 	</select>
+	
+	<insert id="insertBoard">
+		INSERT INTO 
+				BOARD 
+		VALUES (
+				(SELECT 
+					IFNULL(MAX(NUM) + 1 , 1)
+				FROM 
+					BOARD AS B), 
+				#{writer}, 
+				#{email}, 
+				#{subject}, 
+				#{password}, 
+				now(),
+				(SELECT 
+					IFNULL(MAX(REF) + 1 , 1) 
+				FROM 
+					BOARD AS B),
+				1, 
+				1, 
+				0, 
+				#{content})		
+	</insert>
 
 </mapper>

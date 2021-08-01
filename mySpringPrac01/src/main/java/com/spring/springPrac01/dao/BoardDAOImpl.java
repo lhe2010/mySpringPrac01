@@ -24,4 +24,9 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardDTO> getAllBoard() throws Exception {
 		return session.selectList("com.spring.mapper.BoardMapper.getAllBoard");
 	}
+
+	@Override
+	public void insertBoard(BoardDTO bdto) throws Exception {
+		session.insert("com.spring.mapper.BoardMapper.insertBoard", bdto);		
+	}
 }

@@ -8,4 +8,5 @@ public interface BoardDAO {
 
 	public void makeDummyData(List<BoardDTO> dummyDataList) throws Exception;
 	public List<BoardDTO> getAllBoard() throws Exception;
+	public void insertBoard(BoardDTO bdto) throws Exception;
 }
