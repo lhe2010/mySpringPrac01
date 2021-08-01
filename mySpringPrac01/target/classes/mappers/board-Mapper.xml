@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.BoardMapper">
+	<insert id="makeDummyData">
+		INSERT INTO
+					BOARD
+		VALUES
+			<foreach collection="list" item="bdto" separator=",">
+				(	#{bdto.num}, 
+					#{bdto.writer}, 
+					#{bdto.email},
+					#{bdto.subject},
+					#{bdto.password}, 
+					now(),
+					#{bdto.ref},
+					#{bdto.reStep},
+					#{bdto.reLevel},
+					#{bdto.readCount}, 
+					#{bdto.content}	)			
+			</foreach>
+	</insert>
+	
+	<select id="getAllBoard" resultType="com.spring.springPrac01.dto.BoardDTO">
+		SELECT * 
+		FROM BOARD
+		ORDER BY REF DESC, RE_STEP;
+	</select>
+
+</mapper>
