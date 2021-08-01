@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.springPrac01.dto.BoardDTO;
 import com.spring.springPrac01.service.BoardService;
@@ -42,6 +43,12 @@ public class BoardController {
 	public String boardWrite(Model model, BoardDTO bdto) throws Exception {
 		boardService.insertBoard(bdto);
 		return "redirect:simpleBoardList";
+	}
+	
+	@RequestMapping(value = "/boardInfo", method = RequestMethod.GET)
+	public String boardInfo(@RequestParam("num") int num, Model model) throws Exception{
+		model.addAttribute("bdto", boardService.getOneBoard(num));
+		return "boardPrac01/bInfo";
 	}
 	
 }

@@ -50,4 +50,13 @@
 				#{content})		
 	</insert>
 
+	<select id="getOneBoard" resultType="com.spring.springPrac01.dto.BoardDTO">
+		SELECT * FROM BOARD WHERE NUM=#{num};
+	</select>
+	
+	<update id="increaseReadCount">
+		UPDATE BOARD
+		SET READ_COUNT = READ_COUNT +1 
+		WHERE NUM=#{num};
+	</update>
 </mapper>

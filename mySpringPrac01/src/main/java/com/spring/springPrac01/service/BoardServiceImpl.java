@@ -69,4 +69,10 @@ public class BoardServiceImpl implements BoardService {
 	public void insertBoard(BoardDTO bdto) throws Exception {
 		boardDAO.insertBoard(bdto);		
 	}
+
+	@Override
+	public BoardDTO getOneBoard(int num) throws Exception {
+		boardDAO.increaseReadCount(num);
+		return boardDAO.getOneBoard(num);
+	}
 }
