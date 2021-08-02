@@ -47,7 +47,11 @@
 				<c:forEach var="bdto" items="${boardList }">
 					<tr>
 						<td>${bdto.num }</td>
-						<td><a href="boardInfo?num=${bdto.num}">${bdto.subject }</a></td>
+						<td><c:if test="${bdto.reStep > 1 }">
+								<c:forEach var="j" begin="0" end="${bdto.reLevel-1 }">
+									&nbsp;&nbsp;
+								</c:forEach> >>
+							</c:if><a href="boardInfo?num=${bdto.num}">${bdto.subject }</a></td>
 						<td>${bdto.writer }</td>
 						<td><fmt:formatDate value="${bdto.regDate }" pattern="yyyy-MM-dd"/></td>
 						<td>${bdto.readCount }</td>
