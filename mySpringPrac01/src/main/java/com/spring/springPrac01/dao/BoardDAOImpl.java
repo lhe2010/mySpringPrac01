@@ -54,6 +54,16 @@ public class BoardDAOImpl implements BoardDAO {
 	public void deleteBoard(BoardDTO bdto) throws Exception {
 		session.delete("com.spring.mapper.BoardMapper.deleteBoard", bdto);		
 	}
+
+	@Override
+	public void updateBoardReplyStep(BoardDTO bdto) throws Exception {
+		session.update("com.spring.mapper.BoardMapper.updateBoardReplyStep", bdto);
+	}
+
+	@Override
+	public void insertReplyBoard(BoardDTO bdto) throws Exception {
+		session.insert("com.spring.mapper.BoardMapper.insertReplyBoard", bdto);
+	}
 	
 	
 }

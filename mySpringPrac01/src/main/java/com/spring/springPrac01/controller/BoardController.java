@@ -51,13 +51,13 @@ public class BoardController {
 		return "boardPrac01/bInfo";
 	}
 	@RequestMapping(value="/boardUpdate", method = RequestMethod.GET)
-	public String boardWrite(@RequestParam("num") int num, Model model) throws Exception {
+	public String boardUpdate(@RequestParam("num") int num, Model model) throws Exception {
 		model.addAttribute("bdto", boardService.getOneBoardNoIncrease(num));
 		return "boardPrac01/bUpdate";
 	}
 	
 	@RequestMapping(value="/boardUpdate", method = RequestMethod.POST)
-	public String boardWrite(BoardDTO bdto, Model model) throws Exception{
+	public String boardUpdate(BoardDTO bdto, Model model) throws Exception{
 		if(boardService.updateBoard(bdto)) 
 			model.addAttribute("success", true);
 		else
@@ -79,4 +79,17 @@ public class BoardController {
 			model.addAttribute("success", false);
 		return "boardPrac01/bDeletePro";
 	}
+	
+	@RequestMapping(value = "/boardReplyWrite", method = RequestMethod.GET)
+	public String boardReplyWrite(@RequestParam("num") int num, Model model) throws Exception{
+		model.addAttribute("bdto", boardService.getOneBoardNoIncrease(num));
+		return "boardPrac01/bReply";
+	}
+	
+	@RequestMapping(value = "/boardReplyWrite", method = RequestMethod.POST)
+	public String boardReplyWrite(Model model, BoardDTO bdto) throws Exception {
+		boardService.insertReplyBoard(bdto);
+		return "redirect:simpleBoardList";
+	}
+	
 }

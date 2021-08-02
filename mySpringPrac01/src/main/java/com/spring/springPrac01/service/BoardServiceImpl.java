@@ -98,4 +98,10 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return false;
 	}
+
+	@Override
+	public void insertReplyBoard(BoardDTO bdto) throws Exception {
+		boardDAO.updateBoardReplyStep(bdto);
+		boardDAO.insertReplyBoard(bdto);		
+	}
 }

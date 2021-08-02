@@ -75,4 +75,22 @@
 		DELETE FROM BOARD
 		WHERE NUM=#{num}
 	</delete>
+	
+	<update id="updateBoardReplyStep">
+		<![CDATA[
+				UPDATE BOARD
+				SET RE_STEP = RE_STEP+1
+				WHERE REF=#{ref} AND RE_STEP > #{reStep}
+		]]>
+	</update>
+	
+	<insert id="insertReplyBoard">
+		INSERT INTO BOARD
+		VALUES(
+				(SELECT MAX(NUM)+1
+				 FROM BOARD AS B),
+				#{writer}, #{email}, #{subject}, #{password}, now(),
+				#{ref}, #{reStep}+1, #{reLevel}+1, 0,
+				#{content});		
+	</insert>
 </mapper>
