@@ -75,4 +75,18 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.increaseReadCount(num);
 		return boardDAO.getOneBoard(num);
 	}
+
+	@Override
+	public boolean updateBoard(BoardDTO bdto) throws Exception {
+		if(boardDAO.validateUserCheck(bdto) != null) {
+			boardDAO.updateBoard(bdto);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public BoardDTO getOneBoardNoIncrease(int num) throws Exception {
+		return boardDAO.getOneBoard(num);
+	}
 }

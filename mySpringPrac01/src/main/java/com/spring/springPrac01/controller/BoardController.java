@@ -21,7 +21,7 @@ public class BoardController {
 //		return "redirect:boardList";
 		return "redirect:simpleBoardList";
 	}
-	
+	 
 	@RequestMapping(value = "/simpleBoardList", method = RequestMethod.GET)
 	public String simpleBoardList(Model model) throws Exception {
 		model.addAttribute("boardList", boardService.getAllBoard());
@@ -50,5 +50,19 @@ public class BoardController {
 		model.addAttribute("bdto", boardService.getOneBoard(num));
 		return "boardPrac01/bInfo";
 	}
+	@RequestMapping(value="/boardUpdate", method = RequestMethod.GET)
+	public String boardWrite(@RequestParam("num") int num, Model model) throws Exception {
+		model.addAttribute("bdto", boardService.getOneBoardNoIncrease(num));
+		return "boardPrac01/bUpdate";
+	}
 	
+	@RequestMapping(value="/boardUpdate", method = RequestMethod.POST)
+	public String boardWrite(BoardDTO bdto, Model model) throws Exception{
+		if(boardService.updateBoard(bdto)) 
+			model.addAttribute("success", true);
+		else
+			model.addAttribute("success", false);
+		
+		return "boardPrac01/bUpdatePro";
+	}
 }
