@@ -11,6 +11,7 @@ public interface BoardService {
 	public void insertBoard(BoardDTO bdto) throws Exception;
 	public BoardDTO getOneBoard(int num) throws Exception;
 	public boolean updateBoard(BoardDTO bdto) throws Exception;
-	public BoardDTO getOneBoardNoIncrease (int num) throws Exception; 
+	public BoardDTO getOneBoardNoIncrease (int num) throws Exception;
+	public boolean deleteBoard(BoardDTO bdto) throws Exception;
 	
 }

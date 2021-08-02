@@ -89,4 +89,13 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDTO getOneBoardNoIncrease(int num) throws Exception {
 		return boardDAO.getOneBoard(num);
 	}
+
+	@Override
+	public boolean deleteBoard(BoardDTO bdto) throws Exception {
+		if(boardDAO.validateUserCheck(bdto) != null) {
+			boardDAO.deleteBoard(bdto);
+			return true;
+		}
+		return false;
+	}
 }
