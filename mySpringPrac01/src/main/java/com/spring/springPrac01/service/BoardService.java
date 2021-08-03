@@ -1,6 +1,7 @@
 package com.spring.springPrac01.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.spring.springPrac01.dto.BoardDTO;
 
@@ -14,5 +15,6 @@ public interface BoardService {
 	public BoardDTO getOneBoardNoIncrease (int num) throws Exception;
 	public boolean deleteBoard(BoardDTO bdto) throws Exception;
 	public void insertReplyBoard(BoardDTO bdto) throws Exception;
+	public List<BoardDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception;
 	
 }

@@ -1,6 +1,7 @@
 package com.spring.springPrac01.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -63,6 +64,16 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void insertReplyBoard(BoardDTO bdto) throws Exception {
 		session.insert("com.spring.mapper.BoardMapper.insertReplyBoard", bdto);
+	}
+
+	@Override
+	public List<BoardDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception {
+//		System.out.println("dao진입");
+		List<BoardDTO> list = session.selectList("com.spring.mapper.BoardMapper.getSearchBoard", searchInfo);
+//		for (BoardDTO boardDTO : list) {
+//			System.out.println(boardDTO);
+//		}
+		return list;
 	}
 	
 	

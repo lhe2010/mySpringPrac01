@@ -1,5 +1,9 @@
 package com.spring.springPrac01.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +22,26 @@ public class BoardController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main() {
-//		return "redirect:boardList";
-		return "redirect:simpleBoardList";
+		return "redirect:boardList";
+//		return "redirect:simpleBoardList";
 	}
-	 
+	
+	@RequestMapping(value = "/boardList")
+	public String boardList(@RequestParam(name = "searchKeyword", defaultValue = "total") String searchKeyword,
+							@RequestParam(name = "searchWord", defaultValue = "") String searchWord,	
+							Model model) throws Exception {
+		
+		Map<String, Object> searchInfo = new HashMap<String, Object>();
+		searchInfo.put("searchKeyword", searchKeyword);
+		searchInfo.put("searchWord", searchWord);
+		List<BoardDTO> boardList = boardService.getSearchBoard(searchInfo); 
+		model.addAttribute("boardList",	boardList);
+		model.addAttribute("searchKeyword" , searchKeyword);
+		model.addAttribute("searchWord" , searchWord);
+		return "boardPrac01/bList";
+	}
+	
+	
 	@RequestMapping(value = "/simpleBoardList", method = RequestMethod.GET)
 	public String simpleBoardList(Model model) throws Exception {
 		model.addAttribute("boardList", boardService.getAllBoard());

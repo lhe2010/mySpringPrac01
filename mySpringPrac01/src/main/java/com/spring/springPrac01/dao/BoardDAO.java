@@ -1,6 +1,7 @@
 package com.spring.springPrac01.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.spring.springPrac01.dto.BoardDTO;
 
@@ -16,4 +17,5 @@ public interface BoardDAO {
 	public void deleteBoard(BoardDTO bdto) throws Exception;
 	public void updateBoardReplyStep(BoardDTO bdto) throws Exception;
 	public void insertReplyBoard(BoardDTO bdto) throws Exception;
+	public List<BoardDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception;
 }

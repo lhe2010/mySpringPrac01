@@ -3,6 +3,7 @@ package com.spring.springPrac01.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -103,5 +104,11 @@ public class BoardServiceImpl implements BoardService {
 	public void insertReplyBoard(BoardDTO bdto) throws Exception {
 		boardDAO.updateBoardReplyStep(bdto);
 		boardDAO.insertReplyBoard(bdto);		
+	}
+
+	@Override
+	public List<BoardDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception {
+		System.out.println("서비스진입");
+		return boardDAO.getSearchBoard(searchInfo);
 	}
 }

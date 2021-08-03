@@ -93,4 +93,34 @@
 				#{ref}, #{reStep}+1, #{reLevel}+1, 0,
 				#{content});		
 	</insert>
+	
+	<select id="getSearchBoard" resultType="com.spring.springPrac01.dto.BoardDTO">
+		<choose>
+			<when test="searchKeyword.equals('total')">
+				<choose>
+					<when test="searchWord.equals('')">
+						SELECT * FROM BOARD
+						ORDER BY REF DESC, RE_STEP;
+					</when>
+					<otherwise>
+						SELECT * FROM BOARD
+						WHERE 	SUBJECT LIKE CONCAT('%',#{searchWord},'%') OR
+								WRITER LIKE CONCAT('%',#{searchWord},'%')
+						ORDER BY REF DESC, RE_STEP;
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				SELECT * FROM BOARD
+				WHERE
+						<if test="searchKeyword.equals('writer')">
+							WRITER LIKE CONCAT('%', #{searchWord},'%')
+						</if>
+						<if test="searchKeyword.equals('subject')">
+						 	SUBJECT LIKE CONCAT('%',#{searchWord},'%')
+						</if>
+				ORDER BY REF DESC, RE_STEP;
+			</otherwise>
+		</choose>
+	</select>
 </mapper>

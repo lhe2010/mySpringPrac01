@@ -6,6 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>BoardList</title>
+<script src="resources/js/jquery-3.5.1.min.js"></script>
+<script>
+	$().ready(function(){
+		$("#getSearchBoard").click(function(){
+			var searchKeyword = $("#searchKeyword").val();
+			var searchWord = $("#searchWord").val();
+			/* alert("검색중!\n["+searchKeyword+"]"+searchWord); */
+			location.href="boardList?searchKeyword="+searchKeyword+"&searchWord="+searchWord;
+		});
+	});
+</script>
 </head>
 <body>
 	<div>
@@ -60,11 +71,11 @@
 				<tr>
 					<td colspan="5" align="center">
 						<select id="searchKeyword">
-							<option value="total">total</option>
-							<option value="subject">subject</option>
-							<option value="writer">writer</option>
+							<option <c:if test="${searchKeyword eq 'total' }"> selected </c:if> value="total" >total</option>
+							<option <c:if test="${searchKeyword eq 'subject' }"> selected </c:if> value="subject" >subject</option>
+							<option <c:if test="${searchKeyword eq 'writer' }"> selected </c:if> value="writer" >writer</option>
 						</select>
-						<input type="text" id="searchWord" name="searchWord" ><!-- 이후 value="${searchWord}" -->
+						<input type="text" id="searchWord" name="searchWord" value="${searchWord }">
 						<input type="button" id="getSearchBoard" value="Search">
 					</td>
 				</tr>
