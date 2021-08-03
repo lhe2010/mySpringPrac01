@@ -123,4 +123,34 @@
 			</otherwise>
 		</choose>
 	</select>
+	
+	<select id="getAllBoardCount" resultType="int">
+		<choose>
+			<when test="searchKeyword.equals('total')">
+				<choose>
+					<when test="searchWord.equals('')">
+						SELECT 	COUNT(*)
+						FROM 	BOARD
+					</when>
+					<otherwise>
+						SELECT 	COUNT(*)
+						FROM 	BOARD
+						WHERE 	SUBJECT LIKE CONCAT('%', #{searchWord}, '%') OR
+								WRITER LIKE CONCAT('%', #{searchWord}, '%')
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				SELECT 	COUNT(*)
+				FROM 	BOARD
+				WHERE 
+						<if test="searchKeyword.equals('writer')">
+							WRITER LIKE CONCAT('%', #{searchWord}, '%')
+						</if>
+						<if test="searchKeyword.equals('subject')">
+							SUBJECT LIKE CONCAT('%', #{searchWord}, '%')
+						</if>
+			</otherwise>
+		</choose>
+	</select>
 </mapper>

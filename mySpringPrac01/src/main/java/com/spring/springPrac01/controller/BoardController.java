@@ -34,10 +34,18 @@ public class BoardController {
 		Map<String, Object> searchInfo = new HashMap<String, Object>();
 		searchInfo.put("searchKeyword", searchKeyword);
 		searchInfo.put("searchWord", searchWord);
-		List<BoardDTO> boardList = boardService.getSearchBoard(searchInfo); 
+		List<BoardDTO> boardList = boardService.getSearchBoard(searchInfo);
+		
+		Map<String, String> searchCountInfo = new HashMap<String, String>();
+		searchCountInfo.put("searchKeyword", searchKeyword);
+		searchCountInfo.put("searchWord", searchWord);
+		int totalBoardCount = boardService.getAllBoardCount(searchCountInfo);
+		
 		model.addAttribute("boardList",	boardList);
 		model.addAttribute("searchKeyword" , searchKeyword);
 		model.addAttribute("searchWord" , searchWord);
+		model.addAttribute("totalBoardCount" , totalBoardCount);
+
 		return "boardPrac01/bList";
 	}
 	

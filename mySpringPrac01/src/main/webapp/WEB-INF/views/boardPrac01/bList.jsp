@@ -25,7 +25,7 @@
 	</div>
 	<div>
 		<div>
-			Total <span style="color: red; font-weight: bold">0000</span> entries
+			Total <span style="color: red; font-weight: bold">${totalBoardCount }</span> entries
 		</div>
 		<div>Show 
 			<select id="onePageViewCount">

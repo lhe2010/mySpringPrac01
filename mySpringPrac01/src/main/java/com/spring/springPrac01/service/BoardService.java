@@ -16,5 +16,6 @@ public interface BoardService {
 	public boolean deleteBoard(BoardDTO bdto) throws Exception;
 	public void insertReplyBoard(BoardDTO bdto) throws Exception;
 	public List<BoardDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception;
+	public int getAllBoardCount(Map<String, String> searchCountInfo) throws Exception;
 	
 }

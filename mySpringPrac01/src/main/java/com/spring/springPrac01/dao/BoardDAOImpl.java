@@ -75,6 +75,11 @@ public class BoardDAOImpl implements BoardDAO {
 //		}
 		return list;
 	}
+
+	@Override
+	public int getAllBoardCount(Map<String, String> searchCountInfo) throws Exception {
+		return session.selectOne("com.spring.mapper.BoardMapper.getAllBoardCount", searchCountInfo);
+	}
 	
 	
 }

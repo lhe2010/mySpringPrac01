@@ -111,4 +111,9 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("서비스진입");
 		return boardDAO.getSearchBoard(searchInfo);
 	}
+
+	@Override
+	public int getAllBoardCount(Map<String, String> searchCountInfo) throws Exception {
+		return boardDAO.getAllBoardCount(searchCountInfo);
+	}
 }
