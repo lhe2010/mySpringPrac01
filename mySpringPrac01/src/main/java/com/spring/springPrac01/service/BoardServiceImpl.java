@@ -108,7 +108,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception {
-		System.out.println("서비스진입");
 		return boardDAO.getSearchBoard(searchInfo);
 	}
 

@@ -10,10 +10,17 @@
 <script>
 	$().ready(function(){
 		$("#getSearchBoard").click(function(){
+			var onePageViewCount = $("#onePageViewCount").val(); 
 			var searchKeyword = $("#searchKeyword").val();
 			var searchWord = $("#searchWord").val();
 			/* alert("검색중!\n["+searchKeyword+"]"+searchWord); */
-			location.href="boardList?searchKeyword="+searchKeyword+"&searchWord="+searchWord;
+			location.href="boardList?onePageViewCount="+onePageViewCount+"&searchKeyword="+searchKeyword+"&searchWord="+searchWord;
+		});
+		$("#onePageViewCount").change(function(){
+			var onePageViewCount = $("#onePageViewCount").val(); 
+			var searchKeyword = $("#searchKeyword").val();
+			var searchWord = $("#searchWord").val();
+			location.href="boardList?onePageViewCount="+onePageViewCount+"&searchKeyword="+searchKeyword+"&searchWord="+searchWord;
 		});
 	});
 </script>
@@ -29,9 +36,9 @@
 		</div>
 		<div>Show 
 			<select id="onePageViewCount">
-				<option value="5">5</option>
-				<option value="7">7</option>
-				<option value="10">10</option>
+				<option value="5" <c:if test="${onePageViewCount eq 5}"> selected</c:if>>5</option>
+				<option value="7" <c:if test="${onePageViewCount eq 7}"> selected</c:if>>7</option>
+				<option value="10" <c:if test="${onePageViewCount eq 10}"> selected</c:if>>10</option>
 			</select> entries
 		</div>
 		<div>
@@ -55,9 +62,11 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:set var="order" value="${totalBoardCount - (currentPageNumber -1 ) * onePageViewCount }"/>
 				<c:forEach var="bdto" items="${boardList }">
 					<tr>
-						<td>${bdto.num }</td>
+						<td><fmt:parseNumber integerOnly="true" value="${order}"/></td>
+							<c:set var="order" value="${order-1 }"/>	
 						<td><c:if test="${bdto.reStep > 1 }">
 								<c:forEach var="j" begin="0" end="${bdto.reLevel-1 }">
 									&nbsp;&nbsp;
@@ -81,6 +90,22 @@
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	<!-- 페이지버튼 -->
+	<div>
+		<c:if test="${totalBoardCount gt 0 }">
+			<ul>
+				<c:if test="${startPage gt 10 }">
+					<li><a href="boardList?currentPageNumber=${startPage-10 }&onePageViewCount=${onePageViewCount}&searchKeyword=${searchKeyword}&searchWord=${searchWord}">Previous</a>
+				</c:if>
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<li><a href="boardList?currentPageNumber=${i}&onePageViewCount=${onePageViewCount}&searchKeyword=${searchKeyword}&searchWord=${searchWord}">${i }</a></li>
+				</c:forEach>
+				<c:if test="${endPage le totalBoardCount && endPage ge 10}">
+					<li><a href="boardList?currentPageNumber=${startPage+10 }&onePageViewCount=${onePageViewCount}&searchKeyword=${searchKeyword}&searchWord=${searchWord}">Next</a>
+				</c:if>
+			</ul>
+		</c:if>
 	</div>
 </body>
 </html>

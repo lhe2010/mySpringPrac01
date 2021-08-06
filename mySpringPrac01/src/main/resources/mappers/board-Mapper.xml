@@ -100,13 +100,15 @@
 				<choose>
 					<when test="searchWord.equals('')">
 						SELECT * FROM BOARD
-						ORDER BY REF DESC, RE_STEP;
+						ORDER BY REF DESC, RE_STEP
+						LIMIT #{startBoardIdx} , #{onePageViewCount};
 					</when>
 					<otherwise>
 						SELECT * FROM BOARD
 						WHERE 	SUBJECT LIKE CONCAT('%',#{searchWord},'%') OR
 								WRITER LIKE CONCAT('%',#{searchWord},'%')
-						ORDER BY REF DESC, RE_STEP;
+						ORDER BY REF DESC, RE_STEP
+						LIMIT #{startBoardIdx} , #{onePageViewCount};
 					</otherwise>
 				</choose>
 			</when>
@@ -119,7 +121,8 @@
 						<if test="searchKeyword.equals('subject')">
 						 	SUBJECT LIKE CONCAT('%',#{searchWord},'%')
 						</if>
-				ORDER BY REF DESC, RE_STEP;
+				ORDER BY REF DESC, RE_STEP
+				LIMIT #{startBoardIdx} , #{onePageViewCount};
 			</otherwise>
 		</choose>
 	</select>

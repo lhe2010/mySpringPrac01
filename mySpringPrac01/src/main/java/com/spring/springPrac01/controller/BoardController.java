@@ -27,11 +27,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/boardList")
-	public String boardList(@RequestParam(name = "searchKeyword", defaultValue = "total") String searchKeyword,
-							@RequestParam(name = "searchWord", defaultValue = "") String searchWord,	
+	public String boardList(@RequestParam(name = "onePageViewCount", defaultValue = "10") int onePageViewCount,
+							@RequestParam(name = "currentPageNumber" , defaultValue = "1") int currentPageNumber,
+							@RequestParam(name = "searchKeyword", defaultValue = "total") String searchKeyword,
+							@RequestParam(name = "searchWord", defaultValue = "") String searchWord,
 							Model model) throws Exception {
 		
+		// 페이지 시작 게시글 인덱스
+		int startBoardIdx = (currentPageNumber - 1) * onePageViewCount;
+		
 		Map<String, Object> searchInfo = new HashMap<String, Object>();
+		searchInfo.put("onePageViewCount", onePageViewCount);
+		searchInfo.put("startBoardIdx", startBoardIdx);
 		searchInfo.put("searchKeyword", searchKeyword);
 		searchInfo.put("searchWord", searchWord);
 		List<BoardDTO> boardList = boardService.getSearchBoard(searchInfo);
@@ -39,13 +46,36 @@ public class BoardController {
 		Map<String, String> searchCountInfo = new HashMap<String, String>();
 		searchCountInfo.put("searchKeyword", searchKeyword);
 		searchCountInfo.put("searchWord", searchWord);
-		int totalBoardCount = boardService.getAllBoardCount(searchCountInfo);
 		
-		model.addAttribute("boardList",	boardList);
+		int totalBoardCount = boardService.getAllBoardCount(searchCountInfo);
+		int addPage = totalBoardCount % onePageViewCount == 0? 0 : 1;
+		int totalPageCount = totalBoardCount / onePageViewCount + addPage;
+		
+		int startPage = 1;
+		if(currentPageNumber % 10 == 0)	
+			startPage = (currentPageNumber / 10 - 1) * 10 + 1;
+		else
+			startPage = (currentPageNumber / 10) * 10 + 1;
+		
+		int endPage = startPage + 9;
+		
+		if(endPage > totalPageCount)
+			endPage = totalPageCount;
+		
+		if(onePageViewCount > totalBoardCount) {
+			startPage = 1;
+			endPage = 0;
+		}
+		
+		model.addAttribute("startPage" , startPage);
+		model.addAttribute("endPage" , endPage);
+		model.addAttribute("totalBoardCount" , totalBoardCount);
+		model.addAttribute("onePageViewCount" , onePageViewCount);
+		model.addAttribute("currentPageNumber" , currentPageNumber);
 		model.addAttribute("searchKeyword" , searchKeyword);
 		model.addAttribute("searchWord" , searchWord);
-		model.addAttribute("totalBoardCount" , totalBoardCount);
-
+		model.addAttribute("boardList",boardList);	
+		
 		return "boardPrac01/bList";
 	}
 	
