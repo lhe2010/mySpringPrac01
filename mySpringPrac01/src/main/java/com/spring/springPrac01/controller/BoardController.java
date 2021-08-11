@@ -100,7 +100,7 @@ public class BoardController {
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
 	public String boardWrite(Model model, BoardDTO bdto) throws Exception {
 		boardService.insertBoard(bdto);
-		return "redirect:simpleBoardList";
+		return "redirect:boardList";
 	}
 	
 	@RequestMapping(value = "/boardInfo", method = RequestMethod.GET)
@@ -147,7 +147,7 @@ public class BoardController {
 	@RequestMapping(value = "/boardReplyWrite", method = RequestMethod.POST)
 	public String boardReplyWrite(Model model, BoardDTO bdto) throws Exception {
 		boardService.insertReplyBoard(bdto);
-		return "redirect:simpleBoardList";
+		return "redirect:boardList";
 	}
 	
 }

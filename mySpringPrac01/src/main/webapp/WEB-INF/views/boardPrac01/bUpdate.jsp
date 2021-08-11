@@ -54,7 +54,7 @@
 					<td colspan="2">
 						<input type="hidden" name="num" value="${bdto.num }" >
 						<input type="submit" value="Modify">
-						<input type="button" value="Main" onclick="location.href='simpleBoardList'">
+						<input type="button" value="Main" onclick="location.href='boardList'">
 					</td>
 				</tr>
 			</table>

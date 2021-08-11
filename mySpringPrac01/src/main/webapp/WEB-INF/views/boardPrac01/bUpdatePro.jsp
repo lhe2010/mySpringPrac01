@@ -11,7 +11,7 @@
 		<c:when test="${success eq true }">
 			<script>
 				alert('수정완료');
-				location.href="simpleBoardList";
+				location.href="boardList";
 			</script>
 		</c:when>
 		<c:otherwise>
