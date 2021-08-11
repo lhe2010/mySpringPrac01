@@ -4,43 +4,44 @@
 <head>
 <meta charset="UTF-8">
 <title>BoardWrite</title>
+<link href="resources/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-	<div align="center" style="padding-top: 100px">
-		<div align="center">
+	<div align="center" style="padding-top: 100px" class="bs-docs-section">
+		<div align="center" class="page-header">
 			<h2>Board Write</h2>
 		</div>
 		<form action="boardWrite"  method="post" >
-			<table border="1" style="width: 700px">
+			<table class="table table-hover" style="width: 700px">
 				<colgroup>
 					<col width="20%"> 
 					<col width="80%">
 				</colgroup>
-				<tr>
-					<td align="center">Writer</td>
-					<td><input type="text" id="writer" name="writer"></td>
+				<tr class="table-default">
+					<td align="center"><span style="color: red">*</span>Writer</td>
+					<td><input type="text" class="form-control" id="writer" name="writer"></td>
 				</tr>
-				<tr>
-					<td align="center">Subject</td>
-					<td><input type="text" id="subject" name="subject"></td>
+				<tr class="table-default">
+					<td align="center"><span style="color: red">*</span>Subject</td>
+					<td><input type="text" class="form-control" id="subject" name="subject"></td>
 				</tr>
-				<tr>
-					<td align="center">E-mail</td>
-					<td><input type="email" id="email" name="email"></td>
+				<tr class="table-default">
+					<td align="center"><span style="color: red">*</span>E-mail</td>
+					<td><input type="email" class="form-control" id="email" name="email"></td>
 				</tr>
-				<tr>
-					<td align="center">Password</td>
-					<td><input type="password" id="password" name="password"></td>
+				<tr class="table-default">
+					<td align="center"><span style="color: red">*</span>Password</td>
+					<td><input type="password" class="form-control" id="password" name="password"></td>
 				</tr>
-				<tr>
+				<tr class="table-default">
 					<td align="center">Content</td>
-					<td><textarea rows="10" cols="50" id="content" name="content"></textarea></td>
+					<td><textarea class="form-control" rows="10" cols="50" id="content" name="content"></textarea></td>
 				</tr>
-				<tr align="center">
+				<tr align="center" class="table-default">
 					<td colspan="2">
-						<input type="submit" value="Write">
-						<input type="reset" value="Reset">
-						<input type="button" value="Main" onclick="location.href='boardList'">
+						<input type="submit" class="btn btn-primary btn-sm" value="Write">
+						<input type="reset" class="btn btn-primary btn-sm" value="Reset">
+						<input type="button" class="btn btn-primary btn-sm" value="Main" onclick="location.href='boardList'">
 					</td>
 				</tr>
 			</table>
